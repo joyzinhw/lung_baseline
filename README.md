@@ -1,27 +1,29 @@
 ## IMPLEMENTAÇÕES
 
-| Parâmetro              | Valor                |
-|------------------------|----------------------|
-| Tamanho da imagem      | 224 × 224            |
-| Épocas                 | 100                  |
-| Paciência              | 20                   |
-| Batch size             | 32                   |
-| Otimizador             | AdamW                |
-| Scheduler              | Cosine Annealing     |
-| T_max                  | 35                   |
-| Learning rate mínima   | 1e-6                 |
-| Weighted sampler       | Sim                  |
-| Loss Function          | CrossEntropyLoss()   |
+| Parâmetro                         | Valor                        |
+|----------------------------------|------------------------------|
+| Tamanho da imagem                | 224 × 224                    |
+| Épocas máximas                   | 100                          |
+| Early Stopping (paciência)       | 20                           |
+| Batch size                       | 32                           |
+| Otimizador                       | AdamW                        |
+| Learning rate inicial            | 3e-4                         |
+| Weight decay                     | 1e-4                         |
+| Loss                             | CrossEntropyLoss             |
+| Scheduler utilizado              | CosineAnnealingLR            |
+| T_max                            | 35                           |
+| Learning rate mínima (eta_min)   | 1e-6                         |
 
 ## AUGMENTATION
 
-| Técnica             | Valor                         |
-|---------------------|-------------------------------|
-| RandomResizedCrop   | 224                           |
-| Rotação             | 15°                           |
-| Flip Horizontal     | 0.5                           |
-| Flip Vertical       | 0.5                           |
-| RandAugment         | num_ops=2, magnitude=7        |
+| Técnica                        | Valor                         |
+|--------------------------------|-------------------------------|
+| RandomResizedCrop              | 224                           |
+| Rotação                        | 15                            |
+| Flip Horizontal                | 0.5                           |
+| Flip Vertical                  | 0.5                           |
+| RandAugment                    | num_ops=2, magnitude=7        |
+| Estratégia de balanceamento    | weighted sampler              |
 
 
 ## RESULTADOS — DATASET 40x
