@@ -1,55 +1,80 @@
 ## IMPLEMENTAÇÕES
 
-| Parâmetro                         | Valor                        |
-|----------------------------------|------------------------------|
-| Tamanho da imagem                | 224 × 224                    |
-| Épocas máximas                   | 100                          |
-| Early Stopping (paciência)       | 20                           |
-| Batch size                       | 32                           |
-| Otimizador                       | AdamW                        |
-| Learning rate inicial            | 3e-4                         |
-| Weight decay                     | 1e-4                         |
-| Loss                             | CrossEntropyLoss             |
-| Scheduler utilizado              | CosineAnnealingLR            |
-| T_max                            | 35                           |
-| Learning rate mínima (eta_min)   | 1e-6                         |
-
+| Parâmetro              | Valor                |
+|------------------------|----------------------|
+| Tamanho da imagem      | 224 × 224            |
+| Épocas                 | 100                  |
+| Paciência              | 20                   |
+| Batch size             | 32                   |
+| Otimizador             | AdamW                |
+| Scheduler              | Cosine Annealing     |
+| T_max                  | 35                   |
+| Learning rate mínima   | 1e-6                 |
+| Weighted sampler       | Sim                  |
+| Loss Function          | CrossEntropyLoss()   |
+| Dropout                | 0.3                  |
+---
 ## AUGMENTATION
 
-| Técnica                        | Valor                         |
-|--------------------------------|-------------------------------|
-| RandomResizedCrop              | 224                           |
-| Rotação                        | 15                            |
-| Flip Horizontal                | 0.5                           |
-| Flip Vertical                  | 0.5                           |
-| RandAugment                    | num_ops=2, magnitude=7        |
-| Estratégia de balanceamento    | weighted sampler              |
+| Técnica             | Valor                         |
+|---------------------|-------------------------------|
+| RandomResizedCrop   | 224                           |
+| Rotação             | 15°                           |
+| Flip Horizontal     | 0.5                           |
+| Flip Vertical       | 0.5                           |
+| RandAugment         | num_ops=2, magnitude=5        |
 
+---
+## Resultados Quantitativos
 
-## RESULTADOS — DATASET 40x
+### Dataset 40x
 
-| Model             | Accuracy | ROC-AUC | Kappa | Precision (weighted) | Recall (weighted) | F1-score (weighted) |
-|------------------|----------|----------|--------|----------------------|-------------------|---------------------|
-| ResNet50         | 0.9800   | 1.0000   | 0.9695 | 0.9811               | 0.9800            | 0.9799              |
-| EfficientNet-B0  | 0.9800   | 1.0000   | 0.9695 | 0.9811               | 0.9800            | 0.9799              |
-| EfficientNet-B3  | 0.9800   | 0.9974   | 0.9695 | 0.9811               | 0.9800            | 0.9799              |
-| DenseNet121      | 0.9400   | 0.9987   | 0.9080 | 0.9490               | 0.9400            | 0.9385              |
+| Modelo           | Accuracy | ROC-AUC | Kappa  | F1-score (macro) |
+|------------------|----------|--------|--------|------------------|
+| ResNet50         | 0.9200   | 0.9981 | 0.8786 | 0.9246           |
+| EfficientNet-B3  | 0.9000   | 0.9966 | 0.8472 | 0.8962           |
+| DenseNet121      | 0.9200   | 0.9974 | 0.8789 | 0.9168           |
+| ViT-B16          | 0.9000   | 0.9939 | 0.8478 | 0.9025           |
+| ConvNeXt-Tiny    | 0.8600   | 0.9952 | 0.7892 | 0.8655           |
 
 ---
 
-## RESULTADOS — DATASET 20x
+### Dataset 20x
 
-| Model             | Accuracy | ROC-AUC | Kappa | Precision (weighted) | Recall (weighted) | F1-score (weighted) |
-|------------------|----------|----------|--------|----------------------|-------------------|---------------------|
-| ResNet50         | 0.9583   | 0.9902   | 0.9358 | 0.9623               | 0.9583            | 0.9581              |
-| EfficientNet-B0  | 0.7917   | 0.9920   | 0.6817 | 0.8661               | 0.7917            | 0.7771              |
-| EfficientNet-B3  | 0.8542   | 0.9792   | 0.7764 | 0.8739               | 0.8542            | 0.8520              |
-| DenseNet121      | 0.9792   | 1.0000   | 0.9680 | 0.9803               | 0.9792            | 0.9792              |
+| Modelo           | Accuracy | ROC-AUC | Kappa  | F1-score (macro) |
+|------------------|----------|--------|--------|------------------|
+| ResNet50         | 0.8958   | 0.9572 | 0.8405 | 0.9028           |
+| EfficientNet-B3  | 0.8125   | 0.9644 | 0.7195 | 0.8104           |
+| DenseNet121      | 1.0000   | 1.0000 | 1.0000 | 1.0000           |
+| ViT-B16          | 0.7500   | 0.9646 | 0.6252 | 0.7431           |
+| ConvNeXt-Tiny    | 0.8958   | 0.9859 | 0.8410 | 0.9036           |
 ---
 ## Resultados
 
-![Curvas de treinamento 20x](img/acc-loss-20.png)
+![Curvas de treinamento 20x](img/output20.png)
 
-![Curvas de treinamento 40x](img/acc-loss-40.png)
+![Curvas de treinamento 40x](img/output40.png)
+
+---
+
+## Matrizes de Confusão
+
+### Dataset 20x
+
+![ResNet50 20x](results_Rand/cm_resnet50_20x.png)
+![EfficientNet-B3 20x](results_Rand/cm_efficientnet_b3_20x.png)
+![DenseNet121 20x](results_Rand/cm_densenet121_20x.png)
+![ViT-B16 20x](results_Rand/cm_vit_b16_20x.png)
+![ConvNeXt-Tiny 20x](results_Rand/cm_convnext_tiny_20x.png)
+
+---
+
+### Dataset 40x
+
+![ResNet50 40x](results_Rand/cm_resnet50_40x.png)
+![EfficientNet-B3 40x](results_Rand/cm_efficientnet_b3_40x.png)
+![DenseNet121 40x](results_Rand/cm_densenet121_40x.png)
+![ViT-B16 40x](results_Rand/cm_vit_b16_40x.png)
+![ConvNeXt-Tiny 40x](results_Rand/cm_convnext_tiny_40x.png)
 
 ---
