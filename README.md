@@ -52,6 +52,26 @@
 
 ![Curvas de treinamento 20x](img/output20.png)
 
-![Curvas de treinamento 40x](img/acc-loss-40.png)
+![Curvas de treinamento 40x](img/output40.png)
 
 ---
+
+## Matrizes de Confusão
+
+### Dataset 20x
+
+![ResNet50 20x](results_Rand/cm_resnet50_20x.png)
+![EfficientNet-B3 20x](results_Rand/cm_efficientnet_b3_20x.png)
+![DenseNet121 20x](results_Rand/cm_densenet121_20x.png)
+![ViT-B16 20x](results_Rand/cm_vit_b16_20x.png)
+![ConvNeXt-Tiny 20x](results_Rand/cm_convnext_tiny_20x.png)
+
+---
+
+### Dataset 40x
+
+![ResNet50 40x](results_Rand/cm_resnet50_40x.png)
+![EfficientNet-B3 40x](results_Rand/cm_efficientnet_b3_40x.png)
+![DenseNet121 40x](results_Rand/cm_densenet121_40x.png)
+![ViT-B16 40x](results_Rand/cm_vit_b16_40x.png)
+![ConvNeXt-Tiny 40x](results_Rand/cm_convnext_tiny_40x.png)
